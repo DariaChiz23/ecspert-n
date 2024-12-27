@@ -1,59 +1,50 @@
 const header = document.querySelector('header');
-const consultationBtn = document.getElementById('consultationBtn');
-const modal = document.getElementById('consultationModal');
-const closeBtn = document.querySelector('.close');
 let lastScrollY = window.scrollY;
-
+let isScrolling = false;
 
 function handleScroll() {
-    const currentScrollY = window.scrollY;
-    if (currentScrollY > lastScrollY) {
-        header.classList.add('header-hidden');
-    } else {
-        header.classList.remove('header-hidden');
+    if (!isScrolling) {
+        isScrolling = true;
+        setTimeout(() => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollY = currentScrollY;
+            isScrolling = false;
+        }, 100);
     }
-    lastScrollY = currentScrollY;
 }
 
+window.addEventListener('scroll', handleScroll);
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add('animated');
-            observer.unobserve(entry.target);
         }
     });
 });
 
-document.querySelectorAll('.feature-card').forEach((card) => {
-    observer.observe(card);
-});
+document.querySelectorAll('.feature-card').forEach((card) => observer.observe(card));
 
-window.addEventListener('scroll', handleScroll);
-
-
-if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-        if (modal) {
-            modal.style.display = "none";
-        }
-    });
-}
-
+const consultationBtn = document.querySelector('#consultationBtn');
+const modal = document.querySelector('#consultationModal');
+const closeBtn = document.querySelector('.close');
 
 if (modal) {
     window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = "none";
+        if (event.target === modal || event.target.classList.contains('close')) {
+            modal.classList.remove('modal-open');
+            document.body.style.overflow = '';
         }
     });
-}
 
-if (consultationBtn) {
-    consultationBtn.addEventListener('click', () => {
-        if (modal) {
-            modal.style.display = "block";
-        }
+    consultationBtn?.addEventListener('click', () => {
+        modal.classList.add('modal-open');
+        document.body.style.overflow = 'hidden';
     });
 }
 
@@ -62,7 +53,25 @@ const companyDetails = document.querySelector('.footer .company-details');
 
 if (aboutCompanyLink && companyDetails) {
     aboutCompanyLink.addEventListener('click', () => {
-        companyDetails.classList.toggle('hidden');
-        aboutCompanyLink.classList.toggle('active');
+        const isHidden = companyDetails.classList.toggle('hidden');
+        aboutCompanyLink.classList.toggle('active', !isHidden);
     });
 }
+
+const menuToggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.menu');
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+document.body.appendChild(overlay);
+
+menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+    overlay.classList.toggle('active');
+});
+
+overlay.addEventListener('click', () => {
+    menu.classList.remove('active');
+    menuToggle.classList.remove('active');
+    overlay.classList.remove('active');
+});

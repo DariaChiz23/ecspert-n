@@ -1,12 +1,15 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     background-color: #d1dbeb;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
     padding: none;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .container {
@@ -14,6 +17,10 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
+}
+
+.hidden {
+    display: none;
 }
 
 .overlay-image {
@@ -39,12 +46,14 @@ body {
     grid-column: 1 / 4;
     background-color: white;
     position: sticky;
-    padding: 5px 7px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.5s ease;
+    top: 0;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 5px 7px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease;
 }
 
 .header-left {
@@ -79,6 +88,54 @@ header nav ul li a:hover {
     color: #d29758;
 }
 
+.nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    margin-left: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.menu li a:hover {
+    color: #d29758;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 10px;
+}
+
+.menu-toggle:focus {
+    outline: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px auto;
+    transition: all 0.3s ease;
+}
+
 header .phone a {
     color: #183c6b;
     text-decoration: none;
@@ -104,29 +161,29 @@ header img {
 .banner {
     background-image: url('images/167.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
-    padding: 60px 5px;
+    background-position: center;
+    padding: 60px 20px;
     text-align: center;
-    border: solid;
-    border-color: #e6eeff;
-    border-width: none;
+    border: 1px solid #e6eeff;
 }
 
 .banner p {
-    font-size: 22px;
+    font-size: 20px;
     color: #555;
-    background-color: #ffffff3b;
+    background-color: #ffffff39;
     border-radius: 40px;
+    padding: 10px;
+    margin: 10px 0;
 }
 
-.banner button {
+.banner h1 {
     background-color: #d29758ba;
     border: none;
     color: white;
     font-size: 35px;
     font-weight: 500;
     padding: 10px 20px;
-    border-radius: 30px;
+    border-radius: 40px;
     cursor: pointer;
     margin-top: 10px;
     transition: 0.3s ease;
@@ -151,13 +208,13 @@ header img {
 
 .services h2 {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     color: #183c6b;
     font-size: 40px;
 }
 
 .services span {
-    color: #ffffff;
+    color: white;
     background-color: #ce9a66;
     border-radius: 40px;
     padding: 5px 10px;
@@ -176,7 +233,7 @@ header img {
     border: 2px solid #d1dbeb;
     border-radius: 50px;
     background-color: #ffe6c6;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.4s ease;
 }
 
@@ -196,6 +253,12 @@ header img {
     list-style: none;
     list-style-type: "🪙";
     padding: 4px 9px;
+    margin: 5px 0;
+}
+
+.service-card ul {
+    list-style: none;
+    padding-left: 20px;
 }
 
 .butten {
@@ -232,7 +295,7 @@ header img {
     border-radius: 30px;
     cursor: pointer;
     margin-top: 10px;
-    transition: 0.3s ease;
+    transition: background-color 0.3s ease;
     text-align: center;
 }
 
@@ -253,10 +316,6 @@ header img {
     grid-row: span 2;
 }
 
-.footer {
-    grid-column: span 3;
-
-}
 
 .menu {
     list-style: none;
@@ -269,6 +328,7 @@ header img {
     font-weight: bold;
     font-size: 19px;
     padding: 5px 5px;
+    gap: 20px;
 }
 
 .menu_list {
@@ -283,6 +343,8 @@ header img {
 .menu_link {
     color: #183c6b;
     text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
 }
 
 footer {
@@ -303,6 +365,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .contain {
@@ -320,8 +383,8 @@ footer {
     margin-bottom: 20px;
 }
 
-.banner button:hover {
-    background-color: #ba8047;
+.banner h1:hover {
+    background-color: #ba8047c4;
 }
 
 .bunner_content {
@@ -332,42 +395,42 @@ footer {
 }
 
 .services2 {
-    padding: 60px 0;
+    padding: 50px 0;
     background-color: #223660;
     border-radius: 50px;
     position: relative;
 }
 
 .overlay-image2 {
-    position: absolute;
-    top: 69px;
+    position: relative;
+    top: -100px;
     left: 750px;
-    width: 341px;
+    width: 400px;
     z-index: 1;
 }
 
 .overlay-image3 {
     position: absolute;
-    top: -500px;
+    top: -200px;
     left: 10px;
-    width: 300px;
+    width: 310px;
     z-index: 1;
 }
 
 .overlay-image4 {
-    position: absolute;
-    top: 500px;
+    position: relative;
+    top: 10px;
     left: 800px;
     width: 300px;
     z-index: 1;
 }
 
 .services2 h2 {
-    text-align: left;
+    text-align: center;
     margin-bottom: 10px;
     margin-top: 5px;
     color: white;
-    font-size: 40px;
+    font-size: 35px;
     padding: 1px 40px;
 }
 
@@ -484,7 +547,7 @@ footer {
 }
 
 .servic h2 {
-    text-align: left;
+    text-align: center;
     color: #183c6b;
     margin-bottom: 40px;
     font-size: 30px;
@@ -509,11 +572,12 @@ footer {
 
 .cont {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
+    justify-content: center;
 }
 
 
@@ -593,9 +657,9 @@ footer {
 }
 
 .overlay-image5 {
-    position: absolute;
-    top: 400px;
-    left: 570px;
+    position: relative;
+    top: 100px;
+    left: 20px;
     width: 420px;
     z-index: 1;
 }
@@ -604,15 +668,29 @@ footer {
     color: #183c6b;
     margin-bottom: 10px;
     font-size: 40px;
-    text-align: left;
+    text-align: center;
     padding: 20px 40px;
+}
+
+.features button {
+    background-color: #183c6b;
+    border: none;
+    color: white;
+    font-size: 40px;
+    font-weight: 00;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    text-align: center;
 }
 
 .features h3 {
     color: #2a4d90;
     margin-bottom: 10px;
     font-size: 25px;
-    text-align: left;
+    text-align: center;
     padding: 5px 50px;
     font-weight: lighter;
 }
@@ -744,6 +822,16 @@ footer {
     border: none;
 }
 
+.footer {
+    grid-column: span 3;
+    background-color: #26374F;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    position: relative;
+}
+
 .footer-logo,
 .footer-menu,
 .footer-contact {
@@ -765,6 +853,11 @@ footer {
 .footer-contact a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #d29758;
 }
 
 .footer-menu ul li a:hover,
@@ -805,7 +898,12 @@ footer {
 }
 
 .footer-about .arrow {
+    margin-left: 5px;
     transition: transform 0.3s ease;
+}
+
+.footer .arrow.active {
+    transform: rotate(180deg);
 }
 
 .footer-about h3.active .arrow {
@@ -893,4 +991,201 @@ footer {
     width: 27px;
     height: 27px;
     fill: #eff6ff;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-open {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 768px) {
+    .parent {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        grid-column: 1;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-left {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .header-left .logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav {
+        justify-content: flex-end;
+        flex: 1;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .header-left .logo img {
+        margin-top: none;
+        margin-left: -50px;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80%;
+        max-width: 33%;
+        height: 200px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.9s ease;
+    }
+
+    .menu.active {
+        display: flex;
+        transform: translateX(0);
+        margin: 120px auto;
+        padding: 0 15px;
+        border-bottom-right-radius: 90px;
+    }
+
+    .menu li {
+        margin-left: 0;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .menu li a {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
+        text-align: center;
+    }
+
+    .menu li:last-child a {
+        border-bottom: none;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .overlay-image {
+        width: 300px;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.342);
+        z-index: 999;
+        display: none;
+    }
+
+    .overlay.active {
+        display: block;
+    }
+
+    .overlay-image {
+        position: relative;
+        top: 1px;
+        left: 10px;
+        width: 80%;
+        z-index: 1;
+    }
+
+    .overlay-image3 {
+        position: relative;
+        top: -40px;
+        left: 1px;
+        width: 80%;
+        z-index: 1;
+    }
+
+    .overlay-image2 {
+        position: relative;
+        top: -110px;
+        left: 20px;
+        width: 90%;
+        z-index: 1;
+    }
+
+    .overlay-image4 {
+        position: relative;
+        top: 60px;
+        left: 50px;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .overlay-image5 {
+        position: relative;
+        top: 1px;
+        left: 40px;
+        width: 320px;
+        z-index: 1;
+    }
 }
