@@ -75,3 +75,15 @@ overlay.addEventListener('click', () => {
     menuToggle.classList.remove('active');
     overlay.classList.remove('active');
 });
+
+const menuLinks = document.querySelectorAll('.menu a');
+
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (menu.classList.contains('active')) {
+            menu.classList.remove('active');
+            menuToggle.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
+});
