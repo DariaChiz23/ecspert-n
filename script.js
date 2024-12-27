@@ -91,7 +91,7 @@ menuLinks.forEach(link => {
 const backToTopButton = document.querySelector('.back-to-top');
 
 window.addEventListener('scroll', () => {
-    if(window.scrollY > 300){
+    if (window.scrollY > 300) {
         backToTopButton.classList.add('active');
     } else {
         backToTopButton.classList.remove('active');
@@ -104,4 +104,12 @@ backToTopButton.addEventListener('click', (event) => {
         top: 0,
         behavior: 'smooth'
     });
+});
+
+window.addEventListener('scroll', () => {
+    if (menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        overlay.classList.remove('active');
+    }
 });
